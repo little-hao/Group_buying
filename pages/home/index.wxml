@@ -1,0 +1,125 @@
+<!--
+  拼单账本：首页
+  1. 当前账本统计
+  2. 有权限时的快速核销
+  3. 最近核销记录与未读通知
+-->
+
+<view class="page">
+
+  <view class="header">
+    <text class="title">拼单账本</text>
+    <text class="subtitle">
+      {{book && book.name ? book.name + ' · ' + roleText : '创建或加入账本后开始使用'}}
+    </text>
+  </view>
+
+  <!-- 管理员未读提醒 -->
+  <view
+    wx:if="{{canManage && unreadCount > 0}}"
+    class="notice-banner"
+    bindtap="goMinePage"
+  >
+    <view class="notice-dot"></view>
+    <text class="notice-text">您有 {{unreadCount}} 条新核销通知</text>
+    <text class="notice-arrow">›</text>
+  </view>
+
+  <!-- 未加入账本 -->
+  <view wx:if="{{!book || !book.id}}" class="card">
+    <text class="card-title">还没有当前账本</text>
+    <text class="card-subtitle">可以创建自己的账本，或通过邀请码/二维码加入他人的账本</text>
+    <button class="primary-button mt-24" bindtap="goMinePage">去「我的」创建账本</button>
+    <button class="secondary-button mt-16" bindtap="goMemberPage">输入邀请码加入</button>
+  </view>
+
+  <block wx:else>
+
+    <!-- 成员仅查看提示 -->
+    <view wx:if="{{!canManage && !canConsume}}" class="view-tip">
+      <text class="view-tip-text">当前为查看权限：可查看成员与次数，核销需账本创建者授权</text>
+      <text class="view-tip-link" bindtap="goMemberPage">查看成员 ›</text>
+    </view>
+
+    <!-- 快速核销（有权限时显示） -->
+    <view wx:if="{{canConsume}}" class="card">
+      <view class="card-title">快速核销</view>
+      <view class="card-subtitle">
+        {{canManage ? '选择成员后输入本次核销次数' : '核销自己的次数'}}
+      </view>
+      <button class="primary-button mt-24" bindtap="handleQuickConsume">核销</button>
+      <button class="secondary-button mt-16" bindtap="goMemberPage">成员 / 账单</button>
+    </view>
+
+    <!-- 账本统计 -->
+    <view class="card stats-card">
+      <view class="stats-item">
+        <text class="stats-number">{{book.totalCount}}</text>
+        <text class="stats-label">总次数</text>
+      </view>
+      <view class="stats-item">
+        <text class="stats-number">{{book.usedCount}}</text>
+        <text class="stats-label">已核销</text>
+      </view>
+      <view class="stats-item">
+        <text class="stats-number text-primary">{{book.remainingCount}}</text>
+        <text class="stats-label">剩余次数</text>
+      </view>
+    </view>
+
+    <!-- 最近核销 -->
+    <view class="card">
+      <view class="flex-between">
+        <text class="card-title">最近核销</text>
+        <text class="text-secondary">共 {{recentRecords.length}} 条</text>
+      </view>
+
+      <view wx:if="{{recentRecords.length > 0}}" class="record-list mt-16">
+        <view wx:for="{{recentRecords}}" wx:key="id" class="record-item">
+          <view class="record-main">
+            <text class="record-title">{{item.title}}</text>
+            <text class="record-time">{{item.timeText}}</text>
+          </view>
+          <text class="record-count">{{item.amountText}}</text>
+        </view>
+      </view>
+
+      <view wx:else class="empty">
+        <text class="empty-title">暂无核销记录</text>
+        <text class="empty-desc">完成第一次核销后，记录会显示在这里</text>
+      </view>
+    </view>
+
+  </block>
+
+
+  <!-- 成员选择弹层 -->
+  <view wx:if="{{showPicker}}" class="picker-mask" bindtap="handleClosePicker">
+    <view class="picker-panel" catchtap="noop">
+      <view class="picker-header">
+        <text class="picker-title">选择核销成员</text>
+        <text class="picker-close" bindtap="handleClosePicker">×</text>
+      </view>
+
+      <scroll-view class="picker-scroll" scroll-y>
+        <view
+          wx:for="{{members}}"
+          wx:key="id"
+          class="picker-item"
+          data-id="{{item.id}}"
+          bindtap="handlePickMember"
+        >
+          <view class="avatar picker-avatar">{{item.initial}}</view>
+          <view class="picker-main">
+            <text class="picker-name">{{item.name}}</text>
+            <text class="picker-desc">剩余 {{item.remainingCount}} 次</text>
+          </view>
+          <text class="picker-arrow">›</text>
+        </view>
+      </scroll-view>
+
+      <view class="picker-cancel" bindtap="handleClosePicker">取消</view>
+    </view>
+  </view>
+
+</view>

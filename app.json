@@ -1,0 +1,50 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/member/index",
+    "pages/mine/index"
+  ],
+
+  "window": {
+    "navigationBarTitleText": "拼单账本",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F6F7F9",
+    "backgroundTextStyle": "light"
+  },
+
+  "tabBar": {
+    "color": "#A5A09A",
+    "selectedColor": "#C9A24B",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/member/index",
+        "text": "成员/账单"
+      },
+      {
+        "pagePath": "pages/mine/index",
+        "text": "我的"
+      }
+    ]
+  },
+
+  "style": "v2",
+
+  "sitemapLocation": "sitemap.json",
+
+  "lazyCodeLoading": "requiredComponents",
+
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  }
+}

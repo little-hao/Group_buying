@@ -1,0 +1,389 @@
+/* =========================
+   我的页面
+   ========================= */
+
+/* 用户信息卡片 */
+.user-card {
+  display: flex;
+  align-items: center;
+}
+
+/* 用户头像 */
+.user-avatar {
+  margin-right: 24rpx;
+}
+
+/* 用户主体 */
+.user-main {
+  flex: 1;
+}
+
+/* 用户名称 */
+.user-name {
+  display: block;
+
+  font-size: 32rpx;
+  font-weight: 600;
+
+  color: var(--color-text);
+}
+
+/* 用户说明 */
+.user-desc {
+  display: block;
+
+  margin-top: 8rpx;
+
+  font-size: 24rpx;
+
+  color: #8c857a;
+}
+
+/* =====================
+   管理员通知
+   ===================== */
+
+.admin-title {
+  display: flex;
+  align-items: center;
+}
+
+.unread-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 32rpx;
+  height: 32rpx;
+
+  margin-left: 12rpx;
+  padding: 0 8rpx;
+
+  border-radius: 999rpx;
+
+  background: #e05a4e;
+
+  color: #ffffff;
+
+  font-size: 20rpx;
+  font-weight: 600;
+}
+
+/* 当前账号角色 */
+.role-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8rpx 16rpx;
+
+  border-radius: 999rpx;
+
+  font-size: 22rpx;
+  font-weight: 600;
+}
+
+.role-admin {
+  background: var(--color-cream);
+  color: var(--color-primary-dark);
+}
+
+.role-member {
+  background: #f3f4f6;
+  color: #8c857a;
+}
+
+.link-text {
+  margin-left: 28rpx;
+
+  font-size: 24rpx;
+
+  color: var(--color-primary-dark);
+}
+
+.link-text.danger {
+  color: #e05a4e;
+}
+
+/* 通知列表 */
+.notice-list {
+  overflow: hidden;
+
+  border-radius: 16rpx;
+}
+
+.notice-item {
+  display: flex;
+  align-items: center;
+
+  padding: 22rpx 0;
+
+  border-bottom: 1rpx solid #f0ece0;
+}
+
+.notice-item:last-child {
+  border-bottom: none;
+}
+
+.notice-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.notice-title {
+  display: block;
+
+  font-size: 28rpx;
+  font-weight: 500;
+
+  color: var(--color-text);
+}
+
+.notice-time {
+  display: block;
+
+  margin-top: 8rpx;
+
+  font-size: 22rpx;
+
+  color: #b5afa2;
+}
+
+/* 空状态（内嵌） */
+.notice-empty {
+  padding: 60rpx 30rpx;
+}
+
+/* =====================
+   账本信息
+   ===================== */
+
+.book-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 22rpx 0;
+
+  border-bottom: 1rpx solid #f0ece0;
+}
+
+/* 最后一项取消边框 */
+.book-row:last-child {
+  border-bottom: none;
+}
+
+/* 左侧文字 */
+.book-label {
+  font-size: 26rpx;
+
+  color: #8c857a;
+}
+
+/* 右侧文字 */
+.book-value {
+  max-width: 60%;
+
+  text-align: right;
+
+  font-size: 28rpx;
+  font-weight: 500;
+
+  color: var(--color-text);
+}
+
+/* 右箭头 */
+.list-arrow {
+  margin-left: 20rpx;
+
+  font-size: 40rpx;
+
+  line-height: 1;
+
+  color: #b5afa2;
+}
+
+/* 云同步状态 */
+.cloud-warning {
+  background: #fff6e6;
+  border: 1rpx solid #f0dfb8;
+}
+
+/* 头像图片 */
+.user-avatar-img {
+  width: 96rpx;
+  height: 96rpx;
+  margin-right: 24rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* 账户身份行 */
+.account-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: -16rpx;
+}
+
+/* 标签 */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 12rpx;
+  padding: 6rpx 14rpx;
+  border-radius: 999rpx;
+  font-size: 20rpx;
+  font-weight: 600;
+}
+
+.tag-admin {
+  background: #e8d5a3;
+  color: #6b4f12;
+}
+
+.tag-owner {
+  background: var(--color-cream);
+  color: var(--color-primary-dark);
+}
+
+.tag-member {
+  background: #f3f4f6;
+  color: #8c857a;
+}
+
+.tag-current {
+  background: #e8f5ec;
+  color: #3f9d63;
+}
+
+/* 账本列表 */
+.book-list-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid #f0ece0;
+}
+
+.book-list-item:last-child {
+  border-bottom: none;
+}
+
+.book-active {
+  border-radius: 12rpx;
+  background: var(--color-cream);
+  padding-left: 16rpx;
+  padding-right: 16rpx;
+}
+
+.book-list-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.book-list-desc {
+  display: block;
+  margin-top: 8rpx;
+  font-size: 22rpx;
+  color: #8c857a;
+}
+
+.danger-text {
+  color: #e05a4e;
+}
+
+/* 描述文本 */
+.bind-desc {
+  display: block;
+  margin-top: 14rpx;
+  font-size: 24rpx;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+/* 头像昵称资料 */
+.profile-card {
+  margin-top: -8rpx;
+}
+
+.profile-body {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 24rpx;
+}
+
+.avatar-pick {
+  width: 144rpx;
+  height: 144rpx;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--color-page-bg);
+  overflow: hidden;
+}
+
+.avatar-pick::after {
+  border: none;
+}
+
+.avatar-pick-img {
+  width: 144rpx;
+  height: 144rpx;
+  margin: 0;
+  border-radius: 50%;
+}
+
+.avatar-pick-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 144rpx;
+  color: var(--color-primary-dark);
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+.profile-fields {
+  flex: 1;
+  margin-left: 28rpx;
+}
+
+/* 通知推送状态 */
+.notice-status {
+  display: block;
+  margin-top: 6rpx;
+  font-size: 20rpx;
+}
+
+.notice-status.ok {
+  color: var(--color-success);
+}
+
+.notice-status.fail {
+  color: var(--color-danger);
+}
+
+/* 紧凑空状态 */
+.slim-empty {
+  padding: 48rpx 24rpx;
+}
+
+.slim-empty .empty-title {
+  margin-top: 0;
+}
+
+/* 账本名 / 提示文字 */
+.member-name {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.tip-text {
+  font-size: 22rpx;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
