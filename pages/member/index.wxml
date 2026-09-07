@@ -1,0 +1,155 @@
+<!--
+  成员管理 + 账单页面
+  1. 同一账本成员与次数查看
+  2. 创建者/授权管理员：添加、分配、核销、删除、邀请二维码
+  3. 创建者可授予成员核销/管理权限
+  4. 扫码或输入邀请码加入账本
+-->
+
+<view class="page">
+
+  <view class="page-header">
+    <text class="page-title">成员 / 账单</text>
+    <text class="page-subtitle">
+      {{book && book.name ? book.name + ' · ' + roleText : '选择或加入一个账本'}}
+    </text>
+  </view>
+
+  <!-- 未加入时的绑定引导 -->
+  <view wx:if="{{!canManage && !currentMember}}" class="card bind-card">
+    <text class="card-title">加入账本</text>
+    <text class="bind-desc">
+      向账本创建者获取邀请码或邀请二维码，加入后即可查看该账本的成员与次数。
+    </text>
+    <button class="primary-button mt-24" bindtap="handleShowBindPanel">输入邀请码</button>
+    <button class="secondary-button mt-16" bindtap="goMinePage">去「我的」创建账本</button>
+  </view>
+
+  <!-- ===================== 成员列表 ===================== -->
+  <view class="card">
+    <view class="flex-between mb-16">
+      <text class="card-title">{{canManage ? '成员管理' : '成员与次数'}}</text>
+      <button
+        wx:if="{{canManage}}"
+        class="small-button"
+        bindtap="handleAddMember"
+      >
+        + 添加
+      </button>
+    </view>
+
+    <view class="tip-text">
+      {{canManage ? (canGrant ? '点击成员核销/分配/权限，长按删除，未绑定成员可生成邀请二维码' : '点击成员核销/分配，未绑定成员可生成邀请二维码') : (canConsume ? '可查看账本成员与次数，点击「我」可核销自己的次数' : '同一账本内可查看成员与次数，核销需创建者授权')}}
+    </view>
+
+    <view wx:if="{{members.length > 0}}" class="member-list">
+      <view
+        wx:for="{{members}}"
+        wx:key="id"
+        class="member-item"
+        data-id="{{item.id}}"
+        bindtap="handleMemberTap"
+        bindlongpress="handleDeleteMember"
+      >
+        <view class="avatar {{item.isMe ? 'avatar-me' : ''}}">
+          {{item.initial}}
+        </view>
+
+        <view class="member-main">
+          <view class="flex">
+            <text class="member-name">{{item.name}}</text>
+            <text wx:if="{{item.isMe}}" class="tag tag-current">我</text>
+            <text wx:if="{{canManage && item.permissions.manage}}" class="tag tag-owner">管理</text>
+            <text wx:elif="{{canManage && item.permissions.consume}}" class="tag tag-primary">核销</text>
+            <text wx:elif="{{canManage && item.bound}}" class="tag tag-member">仅查看</text>
+            <text wx:if="{{canManage && !item.bound}}" class="tag tag-member">待绑定</text>
+          </view>
+
+          <text class="member-desc">
+            总 {{item.totalCount}} 次 · 已核销 {{item.usedCount}} 次
+            <text wx:if="{{canManage && !item.bound}}"> · 邀请码 {{item.inviteCode}}</text>
+          </text>
+        </view>
+
+        <view class="member-right">
+          <text class="member-count">{{item.remainingCount}}</text>
+          <text class="member-unit">次</text>
+        </view>
+      </view>
+    </view>
+
+    <view wx:else class="empty">
+      <text class="empty-title">
+        {{canManage ? '还没有成员' : '账本内暂无成员'}}
+      </text>
+      <text class="empty-desc">
+        {{canManage ? '点击右上角「添加」建立成员并分配次数' : '账本创建者添加成员后可在此查看'}}
+      </text>
+    </view>
+  </view>
+
+  <!-- ===================== 账单 ===================== -->
+  <view class="card">
+    <view class="flex-between mb-16">
+      <text class="card-title">账单</text>
+      <text class="text-secondary">最近记录</text>
+    </view>
+
+    <view wx:if="{{bills.length > 0}}">
+      <view wx:for="{{bills}}" wx:key="id" class="bill-item">
+        <view class="bill-main">
+          <text class="bill-title">{{item.title}}</text>
+          <text class="bill-time">{{item.timeText}}</text>
+        </view>
+        <text class="bill-amount {{item.type === 'consume' ? 'amount-consume' : 'amount-recharge'}}">
+          {{item.amountText}}
+        </text>
+      </view>
+    </view>
+
+    <view wx:else class="empty">
+      <text class="empty-title">暂无账单</text>
+      <text class="empty-desc">分配或核销次数后，流水会显示在这里</text>
+    </view>
+  </view>
+
+</view>
+
+<!-- ===================== 输入邀请码 ===================== -->
+<view wx:if="{{showBindPanel}}" class="bind-mask" bindtap="handleCloseBindPanel">
+  <view class="bind-panel" catchtap="noop">
+    <view class="bind-header">
+      <text class="bind-title">加入账本</text>
+      <text class="bind-close" bindtap="handleCloseBindPanel">×</text>
+    </view>
+
+    <input
+      class="form-input"
+      type="number"
+      maxlength="6"
+      placeholder="请输入 6 位邀请码"
+      placeholder-class="form-input-placeholder"
+      value="{{inviteCodeInput}}"
+      bindinput="handleInviteCodeInput"
+    />
+
+    <button class="primary-button mt-24" bindtap="handleBindMember">确认加入</button>
+  </view>
+</view>
+
+<!-- ===================== 邀请二维码 ===================== -->
+<view wx:if="{{qrPanelVisible}}" class="qr-mask" bindtap="handleCloseQr">
+  <view class="qr-panel" catchtap="noop">
+    <view class="bind-header">
+      <text class="bind-title">邀请「{{qrMemberName}}」</text>
+      <text class="bind-close" bindtap="handleCloseQr">×</text>
+    </view>
+
+    <view class="qr-body">
+      <image wx:if="{{qrPath}}" class="qr-image" src="{{qrPath}}" mode="aspectFit"></image>
+      <text wx:else class="qr-placeholder">二维码生成中</text>
+      <text class="qr-code">邀请码：{{qrInviteCode}}</text>
+      <text class="qr-tip">对方使用微信扫码后即可进入小程序加入账本</text>
+    </view>
+  </view>
+</view>

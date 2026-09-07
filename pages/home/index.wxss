@@ -1,0 +1,340 @@
+/* =========================
+   拼单账本：首页样式
+   暖金「记账」风格
+   ========================= */
+
+/* 页面 */
+.page {
+  min-height: 100vh;
+  padding: 36rpx 32rpx 48rpx;
+  background: var(--color-page-bg);
+  color: var(--color-text);
+}
+
+/* =========================
+   顶部
+   ========================= */
+
+.header {
+  margin-bottom: 32rpx;
+}
+
+.title {
+  display: block;
+  font-size: 44rpx;
+  font-weight: 700;
+  letter-spacing: 1rpx;
+  color: var(--color-primary);
+}
+
+.subtitle {
+  display: block;
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: #8c857a;
+}
+
+/* =========================
+   管理员提醒横幅
+   ========================= */
+
+.notice-banner {
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 24rpx;
+  padding: 20rpx 24rpx;
+
+  background: var(--color-cream);
+  border: 1rpx solid #efe3c2;
+  border-radius: 16rpx;
+}
+
+.notice-dot {
+  width: 14rpx;
+  height: 14rpx;
+  margin-right: 14rpx;
+
+  border-radius: 50%;
+  background: #ffcc00;
+}
+
+.notice-text {
+  flex: 1;
+  min-width: 0;
+
+  font-size: 26rpx;
+  color: var(--color-primary-dark);
+}
+
+.notice-arrow {
+  margin-left: 12rpx;
+
+  font-size: 36rpx;
+  line-height: 1;
+  color: var(--color-primary);
+}
+
+/* =========================
+   最近核销记录
+   ========================= */
+
+.record-li
+{
+  overflow: hidden;
+
+  border-radius: 16rpx;
+}
+
+.record-item {
+  display: flex;
+  align-items: center;
+
+  padding: 22rpx 0;
+
+  border-bottom: 1rpx solid #f0ece0;
+}
+
+.record-item:last-child {
+  border-bottom: none;
+}
+
+.record-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.record-title {
+  display: block;
+
+  font-size: 28rpx;
+  font-weight: 500;
+
+  color: var(--color-text);
+}
+
+.record-time {
+  display: block;
+
+  margin-top: 8rpx;
+
+  font-size: 22rpx;
+  color: #b5afa2;
+}
+
+.record-count {
+  margin-left: 20rpx;
+
+  font-size: 28rpx;
+  font-weight: 600;
+
+  color: #e05a4e;
+}
+
+/* =========================
+   底部说明
+   ========================= */
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-top: 100rpx;
+
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.footer-line {
+  width: 80rpx;
+  height: 4rpx;
+
+  margin-bottom: 22rpx;
+
+  border-radius: 4rpx;
+
+  background: var(--color-primary);
+}
+
+.footer-title {
+  font-size: 26rpx;
+  font-weight: 600;
+
+  color: #8c857a;
+}
+
+.footer-desc {
+  margin-top: 10rpx;
+
+  font-size: 22rpx;
+
+  color: #b5afa2;
+}
+/* =========================
+   成员选择弹层
+   ========================= */
+
+.picker-mask {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 200;
+
+  display: flex;
+  align-items: flex-end;
+
+  background: rgba(43, 38, 32, 0.45);
+}
+
+.picker-panel {
+  width: 100%;
+
+  padding: 28rpx 0 0;
+
+  background: #ffffff;
+
+  border-radius: 28rpx 28rpx 0 0;
+
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.picker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 32rpx 20rpx;
+}
+
+.picker-title {
+  font-size: 32rpx;
+  font-weight: 600;
+
+  color: var(--color-text);
+}
+
+.picker-close {
+  width: 56rpx;
+  height: 56rpx;
+
+  border-radius: 50%;
+
+  background: var(--color-page-bg);
+
+  color: #8c857a;
+
+  font-size: 36rpx;
+  line-height: 56rpx;
+  text-align: center;
+}
+
+.picker-scroll {
+  max-height: 50vh;
+}
+
+.picker-item {
+  display: flex;
+  align-items: center;
+
+  padding: 24rpx 32rpx;
+
+  border-top: 1rpx solid #f0ece0;
+}
+
+.picker-avatar {
+  width: 64rpx;
+  height: 64rpx;
+
+  line-height: 64rpx;
+
+  font-size: 26rpx;
+}
+
+.picker-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.picker-name {
+  display: block;
+
+  font-size: 28rpx;
+  font-weight: 500;
+
+  color: var(--color-text);
+}
+
+.picker-desc {
+  display: block;
+
+  margin-top: 6rpx;
+
+  font-size: 22rpx;
+
+  color: #b5afa2;
+}
+
+.picker-arrow {
+  margin-left: 16rpx;
+
+  font-size: 32rpx;
+
+  color: var(--color-primary);
+}
+
+.picker-cancel {
+  height: 96rpx;
+
+  margin-top: 12rpx;
+
+  border-top: 1rpx solid #f0ece0;
+
+  color: #8c857a;
+
+  font-size: 28rpx;
+  line-height: 96rpx;
+  text-align: center;
+}
+/* 虽然理论上能三列排列，但没有明确限制每一列的尺寸和内部高度，剩余次数 比另外两个标签多一个字时，很容易出现视觉不齐。
+上面的新版 CSS 就是专门解决这个问题的*/
+.stats-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stats-item {
+  flex: 1;
+  text-align: center;
+}
+/* 成员查看权限提示 */
+.view-tip {
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 24rpx;
+  padding: 20rpx 24rpx;
+
+  background: var(--color-cream);
+  border: 1rpx solid #efe3c2;
+  border-radius: 16rpx;
+}
+
+.view-tip-text {
+  flex: 1;
+  min-width: 0;
+
+  font-size: 24rpx;
+  color: var(--color-primary-dark);
+}
+
+.view-tip-link {
+  margin-left: 16rpx;
+
+  font-size: 24rpx;
+  font-weight: 600;
+
+  color: var(--color-primary);
+}
